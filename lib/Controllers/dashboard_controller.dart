@@ -10,8 +10,8 @@ class DashboardController extends GetxController{
   //Players Data List (Shown On Post Body)
   List<PlayerData> playerDataList = [
     PlayerData(image: 'images/player5.jpg'),
+    // PlayerData(image: 'images/player3.jpeg'),
     PlayerData(image: 'images/player4.jpeg'),
-    PlayerData(image: 'images/player3.jpeg'),
   ];
 
   ///Dashboard Blue Icons Widgets List

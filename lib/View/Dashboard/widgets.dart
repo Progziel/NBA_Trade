@@ -4,7 +4,8 @@ class DashboardIcons extends StatelessWidget {
   const DashboardIcons({
     super.key,
     required this.icon,
-    required this.text,this.onTap,
+    required this.text,
+    this.onTap,
   });
 
   final IconData icon;
@@ -77,34 +78,86 @@ class MyTab extends StatelessWidget {
 
 class PlayerData extends StatelessWidget {
   const PlayerData({
-    super.key, required this.image,
+    super.key,
+    required this.image,
   });
 
   final String image;
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Get.snackbar('Note!', 'Routing To Player Details Screen',
-          colorText: Colors.white),
-      child: Container(
-        margin: const EdgeInsets.only(right: 5),
-        height: context.height / 5.5,
-        width: context.width / 5.2,
-        child: Image.asset(
-          'images/player5.jpg',
-          fit: BoxFit.fill,
+    return Expanded(
+      child: InkWell(
+        onTap: () => Get.snackbar('Note!', 'Routing To Player Details Screen',
+            colorText: Colors.white),
+        child: Container(
+          margin: EdgeInsets.only(right: 5),
+          child: Image.asset(
+            fit: BoxFit.cover,
+            image,
+          ),
         ),
       ),
     );
   }
 }
 
+class PostBody extends StatelessWidget {
+  DashboardController _dashboardController = Get.find<DashboardController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => _dashboardController.isExpanded.value == false
+          ? SizedBox(
+              height: context.height / 9,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Player/Team Photos
+                  Expanded(
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: _dashboardController.playerDataList),
+                  ),
+                  //Details Text
+                  Expanded(
+                    child: Text(
+                        maxLines: 3,
+                        softWrap: false,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        "The standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
+                  ),
+                ],
+              ),
+            )
+          : SizedBox(
+              height: context.height / 3,
+              child: Column(
+                children: [
+                  //Player/Team Photos
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _dashboardController.playerDataList,
+                    ),
+                  ),
+                  //Details Text
+                  Expanded(
+                    child: Text(
+                        maxLines: 10,
+                        softWrap: false,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        "The standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatThe standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatThe standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+}
+
 class PostHeader extends StatelessWidget {
-  // const PostHeader({
-  //   super.key,
-  //   required DashboardController dashboardController,
-  // }) : _dashboardController = dashboardController;
-  //
   DashboardController _dashboardController = Get.find<DashboardController>();
 
   @override
@@ -162,59 +215,6 @@ class PostHeader extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class PostBody extends StatelessWidget {
-  DashboardController _dashboardController = Get.find<DashboardController>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => _dashboardController.isExpanded.value == false
-          ? Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //Player/Team Photos
-                Container(
-                  child: Row(
-                    children: _dashboardController.playerDataList
-                  ),
-                ),
-                //Details Text
-                Expanded(
-                  child: Container(
-                    child: Text(
-                        maxLines: 6,
-                        softWrap: false,
-                        style: TextStyle(overflow: TextOverflow.ellipsis),
-                        """The standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"""),
-                  ),
-                ),
-              ],
-            )
-          : Column(
-        children: [
-          //Player/Team Photos
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _dashboardController.playerDataList,
-            ),
-          ),
-          //Details Text
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-                maxLines: 6,
-                softWrap: false,
-                style: TextStyle(overflow: TextOverflow.ellipsis),
-                """The standard Lorem Ipsum passage is: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"""),
-          ),
-        ],
-      ),
     );
   }
 }
