@@ -38,8 +38,8 @@ dependencies:
   get: ^4.6.6
   material_symbols_icons: ^4.2719.1
   animations: ^2.0.11
-  buttons_tabbar: ^1.3.8
-
+  dio: ^5.4.1
+  http: ^1.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -46,30 +46,42 @@ class DashboardIcons extends StatelessWidget {
 class MyTab extends StatelessWidget {
   MyTab(
       {super.key,
-      required this.icon,
+       this.icon,
       required this.text,
-      required this.selectedTab});
+      required this.selectedTab, this.unselectedColor, this.textUnselectedColor});
 
-  final IconData icon;
+  final IconData? icon;
   final String text;
   bool selectedTab = false;
+  final Color? unselectedColor;
+  final Color? textUnselectedColor;
 
   @override
   Widget build(BuildContext context) {
-    return Tab(
+    return Container(
+      height: context.height / 15,
+      width: context.width /2.8,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: selectedTab ? kPrimaryColor: unselectedColor
+      ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(
-          icon,
-          color: selectedTab ? Colors.white : Colors.black,
-          size: 16,
+        Visibility(
+          visible: icon != null ? true : false,
+          child: Icon(
+            icon,
+            color: selectedTab ? Colors.white : Colors.black,
+            size: 16,
+          ),
         ),
         SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
-              color: selectedTab ? Colors.white : Colors.black, fontSize: 11),
+              color: selectedTab ? Colors.white : textUnselectedColor, fontSize: 11),
         ),
       ],
     ));

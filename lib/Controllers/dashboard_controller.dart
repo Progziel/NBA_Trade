@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:nba_trade/View/Team%20Selection/team_selection.dart';
 import '../View/Dashboard/dashboard.dart';
 
 class DashboardController extends GetxController{
@@ -20,6 +21,7 @@ class DashboardController extends GetxController{
     DashboardIcons(
       text: 'Team Selection',
       icon: Symbols.diversity_2,
+      onTap: ()=> Get.to(()=> TeamSelection()),
     ),
     DashboardIcons(
       text: 'Trade',
